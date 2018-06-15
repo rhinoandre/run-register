@@ -12,7 +12,7 @@ A simple app to register the runs. Here you can register and manage your runs, l
 # Features
 
 ### Login page must have:
-* [ ] Form with email and password*
+* [ ] Form with email and password
 * [ ] Button to perform the login
 * [ ] Link to create new user *(not required)*
 * [ ] Link to user create a new password *(not required)*
