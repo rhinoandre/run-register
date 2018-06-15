@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
 
 class LoginForm extends Component {
@@ -15,4 +16,6 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+const mapStateToProps = (state) => ({ testingRedux: state.testingRedux });
+
+export default connect(mapStateToProps)(LoginForm);
