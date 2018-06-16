@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import logo from './logo.svg';
 import './App.css';
-import LoginForm from './login';
-
-const initialState = {
-  testingRedux: 'Who wants to go to Span?'
-};
-
-function reducer(state = initialState, action) {
-  return state;
-}
-
-const store = createStore(reducer);
+import LoginForm from './containers/login';
+import store from './store/';
 
 class App extends Component {
   render() {

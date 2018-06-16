@@ -40,3 +40,4 @@ A simple app to register the runs. Here you can register and manage your runs, l
 * [ ] Accessibility - Allow blind users to create runs
 * [ ] Admin mode - Use the user's role
 * [ ] Achievements - Highlight the fartest, the longest and the most run distance
+* [ ] Loading
