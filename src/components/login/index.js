@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, TextField } from '@material-ui/core';
+import { Redirect } from 'react-router';
 import formSerialize from 'form-serialize';
 
 class LoginForm extends Component {
@@ -10,6 +11,10 @@ class LoginForm extends Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return (<Redirect to='/' />)
+    }
+
     return (
       <form onSubmit={this.doLogin.bind(this)}>
         <TextField label='Email' fullWidth={true} name='email' type='email' />

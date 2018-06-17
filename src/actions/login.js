@@ -28,7 +28,6 @@ export function loginFailed(error) {
 
 export function doLogin(loginData) {
   return dispatch => {
-    console.log(loginData)
     dispatch(loginRequest());
     fetch('http://localhost:3001/users/login', {
       method: 'POST',
