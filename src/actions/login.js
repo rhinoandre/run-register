@@ -1,7 +1,8 @@
 export const actions = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
   LOGIN_RECEIVED: 'LOGIN_RECEIVED',
-  LOGIN_FAILED: 'LOGIN_FAILED'
+  LOGIN_FAILED: 'LOGIN_FAILED',
+  SAVE_TOKEN: 'SAVE_TOKEN'
 };
 
 export function loginRequest() {
@@ -11,6 +12,7 @@ export function loginRequest() {
 }
 
 export function loginReceived(data) {
+  localStorage.setItem('token', data.token);
   return {
     type: actions.LOGIN_RECEIVED,
     data
@@ -24,10 +26,17 @@ export function loginFailed(error) {
   };
 }
 
-export function doLogin() {
+export function doLogin(loginData) {
   return dispatch => {
+    console.log(loginData)
     dispatch(loginRequest());
-    return fetch('...')
+    fetch('http://localhost:3001/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(loginData)
+    })
       .then(response => response.json())
       .then(data => dispatch(loginReceived(data)))
       .catch(error => dispatch(loginFailed(error)));

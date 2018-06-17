@@ -5,7 +5,10 @@ export default function reducer(state = {}, action) {
     case actions.LOGIN_REQUEST:
       return state;
     case actions.LOGIN_RECEIVED:
-      return Object.assign({}, state, { date: Date.now() });
+      return Object.assign({}, state, {
+        date: Date.now(),
+        token: action.data.token
+      });
     case actions.LOGIN_FAILED:
       return Object.assign({}, state, { errorMessage: 'An error occurred' });
     default:

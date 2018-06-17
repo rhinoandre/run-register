@@ -1,25 +1,20 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import React from 'react';
+import { ConnectedRouter } from 'connected-react-router';
+import PropTypes from 'prop-types';
 
-import logo from './logo.svg';
 import './App.css';
-import LoginForm from './containers/login';
-import store from './store/';
+import router from './routes/';
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store} className="App">
-        <div className='app'>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <LoginForm />
-          </div>
-      </Provider>
-    );
-  }
+function App({ history }) {
+  return (
+    <ConnectedRouter history={history}>
+      { router }
+    </ConnectedRouter>
+  );
 }
+
+App.propsType = {
+  history: PropTypes.object.isRequired
+};
 
 export default App;
