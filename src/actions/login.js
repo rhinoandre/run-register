@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router';
+import { userAPI } from '../services/user';
 
 export const actions = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -28,16 +29,10 @@ export function loginFailed(error) {
   };
 }
 
-export function doLogin(loginData) {
+export function doLogin({ email, passwd }) {
   return dispatch => {
     dispatch(loginRequest());
-    fetch('http://localhost:3001/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(loginData)
-    })
+    userAPI.login({ email, passwd })
       .then(response => response.json())
       .then(data => dispatch(loginReceived(data)))
       .then(() => dispatch(push('/')))
