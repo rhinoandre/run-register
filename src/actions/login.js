@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 export const actions = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
   LOGIN_RECEIVED: 'LOGIN_RECEIVED',
@@ -38,6 +40,7 @@ export function doLogin(loginData) {
     })
       .then(response => response.json())
       .then(data => dispatch(loginReceived(data)))
+      .then(() => dispatch(push('/')))
       .catch(error => dispatch(loginFailed(error)));
   };
 }
