@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --config=jest.config.json --watch",
+    "test": "jest --config=jest.config.json",
     "test:coverage": "jest --config=jest.config.json --coverage",
     "test:watch": "jest --config=jest.config.json --watch",
     "eject": "react-scripts eject"
