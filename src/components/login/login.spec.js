@@ -54,7 +54,7 @@ describe('Login Form Actions', () => {
     
     // WHEN
     const wrapper = mount(
-      <MemoryRouter initialEntries={['/login']}>
+      <MemoryRouter>
         <LoginForm doLogin={doLogin} isAuthenticated={true} />
       </MemoryRouter>
     );
