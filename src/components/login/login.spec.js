@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
+import { MemoryRouter } from 'react-router';
 
 import LoginForm from './';
 
@@ -45,5 +46,20 @@ describe('Login Form Actions', () => {
 
     // AND
     expect(doLogin).toHaveBeenCalledWith(jasmine.any(Object));
+  });
+
+  it('should redirect to the main route when its already authenticated', () => {
+    // GIVEN
+    const doLogin = jasmine.createSpy('doLogin');
+    
+    // WHEN
+    const wrapper = mount(
+      <MemoryRouter initialEntries={['/login']}>
+        <LoginForm doLogin={doLogin} isAuthenticated={true} />
+      </MemoryRouter>
+    );
+
+    // THEN
+    expect(wrapper.find('Redirect').exists()).toBe(true);
   });
 })

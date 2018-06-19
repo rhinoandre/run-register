@@ -36,4 +36,22 @@ describe('Login Action: ', () => {
     // AND
     expect(localStorage.setItem).toHaveBeenLastCalledWith('token', 'myamazingtoken');
   });
+
+  it('should fail when http request fails', async () => {
+    // GIVEN
+    fetchMock
+      .once(/\/users\/login$/, 503);
+
+    // AND
+    const store = mockStore({ login: {} });
+
+    // WHEN
+    await store.dispatch(loginActions.doLogin({ email: 'rhinoandre@gmail.com', passwd: '123456' }));
+
+    // THEN
+    expect(store.getActions()).toEqual([
+      { type: actions.LOGIN_REQUEST },
+      { type: actions.LOGIN_FAILED, error: jasmine.any(Object) }
+    ])
+  });
 });
