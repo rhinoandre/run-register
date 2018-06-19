@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 
-import { userAPI } from '../services/user';
+import { userAPI } from '../services/';
 
 export const actions = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
