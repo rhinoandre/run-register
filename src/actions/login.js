@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router';
+
 import { userAPI } from '../services/user';
 
 export const actions = {
@@ -29,10 +30,10 @@ export function loginFailed(error) {
   };
 }
 
-export function doLogin({ email, passwd }) {
+export function doLogin(loginData) {
   return dispatch => {
     dispatch(loginRequest());
-    userAPI.login({ email, passwd })
+    return userAPI.login(loginData)
       .then(response => response.json())
       .then(data => dispatch(loginReceived(data)))
       .then(() => dispatch(push('/')))

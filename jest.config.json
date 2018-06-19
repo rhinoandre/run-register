@@ -4,6 +4,7 @@
   },
   "setupFiles": [
       "raf/polyfill",
+      "jest-localstorage-mock",
       "<rootDir>/src/setupTests.js"
   ],
   "snapshotSerializers": [
