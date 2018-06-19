@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 
 import * as loginActions from './login';
-import { actions } from './login';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -17,7 +16,7 @@ describe('Login Action: ', () => {
   it('should PUSH to "/" after logging in successfully', async () => {
     // GIVEN
     fetchMock
-      .postOnce('http://localhost:3001/users/login', { body: { token: 'myamazingtoken' }, headers: { 'content-type': 'application/json' } });
+      .postOnce(/users\/login$/, { body: { token: 'myamazingtoken' }, headers: { 'content-type': 'application/json' } });
 
     // AND
     const store = mockStore({ login: {} })
@@ -27,8 +26,8 @@ describe('Login Action: ', () => {
 
     // THEN
     expect(store.getActions()).toEqual([
-      { type: actions.LOGIN_REQUEST },
-      { data: { token: 'myamazingtoken' }, type: actions.LOGIN_RECEIVED },
+      { type: 'LOGIN_REQUEST' },
+      { type: 'LOGIN_RECEIVED', data: { token: 'myamazingtoken' } },
       // ACTION FROM Connected Router
       { payload: { args: ['/'], method: 'push' }, type: '@@router/CALL_HISTORY_METHOD' }
     ]);
@@ -50,8 +49,8 @@ describe('Login Action: ', () => {
 
     // THEN
     expect(store.getActions()).toEqual([
-      { type: actions.LOGIN_REQUEST },
-      { type: actions.LOGIN_FAILED, error: jasmine.any(Object) }
+      { type: 'LOGIN_REQUEST' },
+      { type: 'LOGIN_FAILED', error: jasmine.any(Object) }
     ])
   });
 });
