@@ -5,13 +5,20 @@ export default function reducer(state = {}, action) {
     case actions.LOGIN_REQUEST:
       return state;
     case actions.LOGIN_RECEIVED:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         date: Date.now(),
         token: action.data.token,
         isAuthenticated: true
-      });
+      };
     case actions.LOGIN_FAILED:
-      return Object.assign({}, state, { errorMessage: 'An error occurred' });
+      return { ...state, errorMessage: 'An error occurred' };
+    case actions.LOGOUT_USER: 
+      return {
+        ...state,
+        token: '',
+        isAuthenticated: false
+      }
     default:
       return state;
   }

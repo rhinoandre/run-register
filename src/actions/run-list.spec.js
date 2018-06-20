@@ -16,25 +16,27 @@ describe('Run List Action', () => {
   it('should dispatch all actions to successfully fetch the runs', async () => {
     // GIVEN
     fetchMock.
-      getOnce(/runs$/, { body: [
-        {
-          "friendly_name": "Just a test",
-          "duration": 234,
-          "distance": 112340,
-          "created": "2018-03-08 15:00:03"
-        },
-        {
-          "friendly_name": "Just another test",
-          "duration": 2342,
-          "distance": 234324,
-          "created": "2018-03-06 15:00:03"
-        }
-      ],
+      getOnce(/runs$/, {
+        body: { data: [
+          {
+            friendly_name: 'Just a test',
+            duration: 234,
+            distance: 112340,
+            created: '2018-03-08 15:00:03'
+          },
+          {
+            friendly_name: 'Just another test',
+            duration: 2342,
+            distance: 234324,
+            created: '2018-03-06 15:00:03'
+          }
+        ], pagination: { message: 'soon :)'
+      }},
       headers: { 'Content-Type': 'application/json' }
     });
 
     // AND
-    const store = mockStore({ runs: {} });
+    const store = mockStore({ runs: {}, login: { token: 'sdfsdf' } });
 
     // WHEN
     await store.dispatch(getAllRuns());
@@ -46,16 +48,16 @@ describe('Run List Action', () => {
         type: 'FETCH_RUN_RECEIVED',
         data: [
           {
-            "friendly_name": "Just a test",
-            "duration": 234,
-            "distance": 112340,
-            "created": "2018-03-08 15:00:03"
+            friendly_name: "Just a test",
+            duration: 234,
+            distance: 112340,
+            created: "2018-03-08 15:00:03"
           },
           {
-            "friendly_name": "Just another test",
-            "duration": 2342,
-            "distance": 234324,
-            "created": "2018-03-06 15:00:03"
+            friendly_name: "Just another test",
+            duration: 2342,
+            distance: 234324,
+            created: "2018-03-06 15:00:03"
           }
         ]
       }
@@ -65,10 +67,10 @@ describe('Run List Action', () => {
   it('should dispatch the fetch error action', async () => {
     // GIVEN
     fetchMock.
-      getOnce(/runs$/, 503, { overwriteRoutes: true });
+      getOnce(/runs$/, Promise.reject({ status: 503 }), { overwriteRoutes: true });
   
     // AND
-    const store = mockStore({ runs: {} });
+    const store = mockStore({ runs: {}, login: { token: 'sdfsdf' } });
   
     // WHEN
     await store.dispatch(getAllRuns());
@@ -77,6 +79,24 @@ describe('Run List Action', () => {
     expect(store.getActions()).toEqual([
       { type: 'FETCH_RUN_REQUEST' },
       { type: 'FETCH_RUN_FAILED', error: jasmine.any(Object) }
+    ]);
+  });
+
+  it('should dispatch the logout user action if the status code is 401', async () => {
+    // GIVEN
+    fetchMock.
+      getOnce(/runs$/, Promise.reject({ status: 401 }), { overwriteRoutes: true });
+  
+    // AND
+    const store = mockStore({ runs: {}, login: { token: 'sdfsdf' } });
+  
+    // WHEN
+    await store.dispatch(getAllRuns());
+  
+    // THEN
+    expect(store.getActions()).toEqual([
+      { type: 'FETCH_RUN_REQUEST' },
+      { type: 'LOGOUT_USER', error: jasmine.any(Object) }
     ]);
   });
 });

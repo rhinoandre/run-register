@@ -1,8 +1,29 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { getAllRuns } from '../actions/run-list';
 import RunList from '../components/runs-list/';
 
-const mapStateToProps = (state) => state;
-const mapDispatchToProps = (dispatch) => ({});
+class RunListContainer extends Component {
+  componentDidMount() {
+    console.log('didmount')
+    this.props.getAllRuns();
+  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RunList);
+  render() {
+    console.log('render')
+    return (<RunList {...this.props} />);
+  }
+}
+
+const mapStateToProps = ({ runs }) => ({
+  runs
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getAllRuns: () => {
+    dispatch(getAllRuns())
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RunListContainer);

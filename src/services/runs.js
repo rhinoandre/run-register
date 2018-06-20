@@ -1,9 +1,12 @@
 export default function(BASE_URL) {
   return {
-    getAll() {
+    getAll(token) {
       return fetch(`${BASE_URL}/runs`, {
         method: 'GET',
-        'Content-Type': 'application/type'
+        headers: {
+          'Content-Type': 'application/type',
+          Authorization: `Bearer ${token}`
+        }
       });
     }
   }

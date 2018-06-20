@@ -1,6 +1,6 @@
 import React from 'react';
 
-function RunList() {
+function RunList(props) {
   return (
     <table>
       <thead>
