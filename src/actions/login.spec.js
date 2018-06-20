@@ -53,4 +53,22 @@ describe('Login Action: ', () => {
       { type: 'LOGIN_FAILED', error: jasmine.any(Object) }
     ])
   });
+
+  it('should fail when an wrogn password is userd (even with the API returning an 200)', async () => {
+    // GIVEN
+    fetchMock
+      .postOnce(/\/users\/login$/, { status: 200, body: { error: true, message: 'wrong credentials' }});
+
+    // AND
+    const store = mockStore({ login: {} });
+
+    // WHEN
+    await store.dispatch(loginActions.doLogin({ email: 'rhinoandre@gmail.com', passwd: '123456' }));
+
+    // THEN
+    expect(store.getActions()).toEqual([
+      { type: 'LOGIN_REQUEST' },
+      { type: 'LOGIN_FAILED', error: jasmine.any(Object) }
+    ])
+  });
 });
