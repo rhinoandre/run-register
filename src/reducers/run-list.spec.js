@@ -122,14 +122,4 @@ describe('RunList Reducer', () => {
       errorMessage: 'Does\'t matter what has here'
     });
   });
-
-  xit('should handle FETCH_RUN_FAILED and logout the user if the error status code is 401', () => {
-    // WHEN
-    const state = reducer(undefined, { type: 'FETCH_RUN_FAILED', error: { status: 401 } });
-
-    // THEN
-    expect(state).toEqual({
-      errorMessage: { status: 401 }
-    });
-  });
 });
