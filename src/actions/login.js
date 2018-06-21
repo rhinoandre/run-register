@@ -1,32 +1,25 @@
 import { push } from 'connected-react-router';
 
 import { userAPI } from '../services/';
-
-export const actions = {
-  LOGIN_REQUEST: 'LOGIN_REQUEST',
-  LOGIN_RECEIVED: 'LOGIN_RECEIVED',
-  LOGIN_FAILED: 'LOGIN_FAILED',
-  SAVE_TOKEN: 'SAVE_TOKEN',
-  LOGOUT_USER: 'LOGOUT_USER'
-};
+import { LOGIN_ACTIONS } from '../constants/';
 
 export function loginRequest() {
   return {
-    type: actions.LOGIN_REQUEST
+    type: LOGIN_ACTIONS.LOGIN_REQUEST
   };
 }
 
 export function loginReceived(data) {
   localStorage.setItem('token', data.token);
   return {
-    type: actions.LOGIN_RECEIVED,
+    type: LOGIN_ACTIONS.LOGIN_RECEIVED,
     data
   };
 }
 
 export function loginFailed(error) {
   return {
-    type: actions.LOGIN_FAILED,
+    type: LOGIN_ACTIONS.LOGIN_FAILED,
     error
   };
 }

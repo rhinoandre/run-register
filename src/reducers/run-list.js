@@ -1,17 +1,17 @@
-import { actions } from '../actions/run-list';
+import { RUN_LIST_ACTIONS } from '../constants';
 
 export default function reducer(state = {}, action) {
   switch(action.type) {
-    case actions.FETCH_RUN_REQUEST:
+    case RUN_LIST_ACTIONS.FETCH_RUN_REQUEST:
       return {
         ...state
       };
-    case actions.FETCH_RUN_RECEIVED:
+    case RUN_LIST_ACTIONS.FETCH_RUN_RECEIVED:
       return {
         ...state,
         runs: action.data
       }
-    case actions.FETCH_RUN_FAILED:
+    case RUN_LIST_ACTIONS.FETCH_RUN_FAILED:
       return {
         ...state,
         errorMessage: action.error

@@ -1,22 +1,16 @@
 import { runAPI } from '../services/';
 
-import { actions as loginActions } from './login';
-
-export const actions = {
-  FETCH_RUN_REQUEST: 'FETCH_RUN_REQUEST',
-  FETCH_RUN_RECEIVED: 'FETCH_RUN_RECEIVED',
-  FETCH_RUN_FAILED: 'FETCH_RUN_FAILED'
-};
+import { LOGIN_ACTIONS, RUN_LIST_ACTIONS } from '../constants';
 
 export function allRunRequest() {
   return {
-    type: actions.FETCH_RUN_REQUEST
+    type: RUN_LIST_ACTIONS.FETCH_RUN_REQUEST
   };
 }
 
 export function fetchRuns(data) {
   return {
-    type: actions.FETCH_RUN_RECEIVED,
+    type: RUN_LIST_ACTIONS.FETCH_RUN_RECEIVED,
     data
   };
 }
@@ -29,9 +23,9 @@ export function fetchRunFailed(error) {
 }
 
 function handleErrorStatusCode(status) {
-  let actionType = actions.FETCH_RUN_FAILED;
+  let actionType = RUN_LIST_ACTIONS.FETCH_RUN_FAILED;
   if (status === 401) {
-    actionType = loginActions.LOGOUT_USER;
+    actionType = LOGIN_ACTIONS.LOGOUT_USER;
   }
 
   return actionType;
