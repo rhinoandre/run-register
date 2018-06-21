@@ -6,12 +6,10 @@ import RunList from '../components/runs-list/';
 
 class RunListContainer extends Component {
   componentDidMount() {
-    console.log('didmount')
     this.props.getAllRuns();
   }
 
   render() {
-    console.log('render')
     return (<RunList {...this.props} />);
   }
 }

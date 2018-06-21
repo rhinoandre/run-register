@@ -1,7 +1,6 @@
 import { actions } from '../actions/run-list';
 
 export default function reducer(state = {}, action) {
-  console.log(action)
   switch(action.type) {
     case actions.FETCH_RUN_REQUEST:
       return {
