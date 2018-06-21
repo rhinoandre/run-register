@@ -13,7 +13,7 @@ export default function reducer(state = {}, action) {
       };
     case actions.LOGIN_FAILED:
       return { ...state, errorMessage: 'An error occurred' };
-    case actions.LOGOUT_USER: 
+    case actions.LOGOUT_USER:
       return {
         ...state,
         token: '',

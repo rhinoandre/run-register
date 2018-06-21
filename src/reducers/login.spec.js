@@ -33,4 +33,12 @@ describe('Login Reducer', () => {
     // THEN
     expect(state).toEqual({ errorMessage: 'An error occurred' });
   });
+
+  it('should handle LOGIN_FAILED (state plue errorMessage)', () => {
+    // WHEN
+    const state = reducer(undefined, { type: actions.LOGOUT_USER });
+  
+    // THEN
+    expect(state).toEqual({ isAuthenticated: false, token: '' });
+  });
 });
