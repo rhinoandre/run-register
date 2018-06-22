@@ -13,7 +13,7 @@ describe('Login Action: ', () => {
     fetchMock.restore();
   });
 
-  it('should PUSH to "/" after logging in successfully', async () => {
+  it('should PUSH to "/runs" after logging in successfully', async () => {
     // GIVEN
     fetchMock
       .postOnce(/users\/login$/, { body: { token: 'myamazingtoken' }, headers: { 'content-type': 'application/json' } });
@@ -29,7 +29,7 @@ describe('Login Action: ', () => {
       { type: 'LOGIN_REQUEST' },
       { type: 'LOGIN_RECEIVED', data: { token: 'myamazingtoken' } },
       // ACTION FROM Connected Router
-      { payload: { args: ['/'], method: 'push' }, type: '@@router/CALL_HISTORY_METHOD' }
+      { payload: { args: ['/runs'], method: 'push' }, type: '@@router/CALL_HISTORY_METHOD' }
     ]);
 
     // AND

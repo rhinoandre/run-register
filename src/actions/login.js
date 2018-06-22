@@ -39,7 +39,7 @@ export function doLogin(loginData) {
       .then(response => response.json())
       .then(handle200WithError)
       .then(data => dispatch(loginReceived(data)))
-      .then(() => dispatch(push('/')))
+      .then(() => dispatch(push('/runs')))
       .catch(error => dispatch(loginFailed(error)));
   };
 }
