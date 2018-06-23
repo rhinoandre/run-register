@@ -62,6 +62,9 @@ describe('Run List Action', () => {
         ]
       }
     ]);
+
+    // AND
+    expect(fetchMock.lastUrl()).toBe('http://localhost:3001/runs');
   });
 
   it('should dispatch the fetch error action', async () => {
@@ -80,6 +83,9 @@ describe('Run List Action', () => {
       { type: 'FETCH_RUN_REQUEST' },
       { type: 'FETCH_RUN_FAILED', error: jasmine.any(Object) }
     ]);
+
+    // AND
+    expect(fetchMock.lastUrl()).toBe('http://localhost:3001/runs');
   });
 
   it('should dispatch the logout user action if the status code is 401', async () => {
@@ -98,5 +104,8 @@ describe('Run List Action', () => {
       { type: 'FETCH_RUN_REQUEST' },
       { type: 'LOGOUT_USER', error: jasmine.any(Object) }
     ]);
+
+    // AND
+    expect(fetchMock.lastUrl()).toBe('http://localhost:3001/runs');
   });
 });

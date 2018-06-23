@@ -50,15 +50,18 @@ describe('Get Run Actions', () => {
         }
       }
     ]);
+
+    // AND
+    expect(fetchMock.lastUrl()).toBe('http://localhost:3001/runs/1');
   });
 
   it('should logout the user if the request return a 401 status', async () => {
     // GIVEN
     fetchMock
-      .getOnce(/runs\/1$/, Promise.reject({ status: 401, error: 'malformed or invalid token' }));
+      .getOnce(/runs\/2$/, Promise.reject({ status: 401, error: 'malformed or invalid token' }));
 
     // WHEN
-    await store.dispatch(getRunAction(1));
+    await store.dispatch(getRunAction(2));
 
     // THEN
     expect(store.getActions()).toEqual([
@@ -68,15 +71,18 @@ describe('Get Run Actions', () => {
         error: jasmine.any(Object)
       }
     ]);
+
+    // AND
+    expect(fetchMock.lastUrl()).toBe('http://localhost:3001/runs/2');
   });
 
   it('should dispatch the get run failed error', async () => {
     // GIVEN
     fetchMock
-      .getOnce(/runs\/1$/, Promise.reject({ status: 503, error: 'malformed or invalid token' }));
+      .getOnce(/runs\/3$/, Promise.reject({ status: 503, error: 'malformed or invalid token' }));
 
     // WHEN
-    await store.dispatch(getRunAction(1));
+    await store.dispatch(getRunAction(3));
 
     // THEN
     expect(store.getActions()).toEqual([
@@ -86,5 +92,8 @@ describe('Get Run Actions', () => {
         error: jasmine.any(Object)
       }
     ]);
+
+    // AND
+    expect(fetchMock.lastUrl()).toBe('http://localhost:3001/runs/3');
   });
 });
