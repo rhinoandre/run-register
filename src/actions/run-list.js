@@ -1,6 +1,6 @@
 import { runAPI } from '../services/';
-
 import { LOGIN_ACTIONS, RUN_LIST_ACTIONS } from '../constants';
+import throwErrorForConnectionNotOK from './errorHandlerForConnection';
 
 export function allRunRequest() {
   return {
@@ -29,18 +29,6 @@ function handleErrorStatusCode(status) {
   }
 
   return actionType;
-}
-
-// Code needed because fetch doesn't call catch when an HTTP error happen
-// It just throws an error when the internet connection is down
-// I could not test this behavior
-// https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
-function throwErrorForConnectionNotOK(response) {
-  if (!response.ok) {
-    throw response;
-  }
-
-  return response;
 }
 
 export function getAllRuns() {
