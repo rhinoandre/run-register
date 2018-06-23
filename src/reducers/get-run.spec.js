@@ -81,7 +81,7 @@ describe('GetRun Reducer', () => {
     });
   });
 
-  it('should handle GET_RUN_FAILED', () => {
+  it('should handle GET_RUN_FAILED returning an error message', () => {
     // WHEN
     const state = reducer(undefined, { type: 'GET_RUN_FAILED', error: 'Does\'t matter what has here' });
 

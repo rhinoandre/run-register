@@ -42,7 +42,7 @@ describe('Create Run Reducer', () => {
     expect(state).toEqual({ login: { token: 'justtoseeifitsreturningthestatecorrectly' }});
   });
 
-  it('should handle CREATE_RUN_FAILED', () => {
+  it('should handle CREATE_RUN_FAILED returning an error message', () => {
     // WHEN
     const state = reducer(
       { login: { token: 'justtoseeifitsreturningthestatecorrectly' }},

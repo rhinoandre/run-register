@@ -113,7 +113,7 @@ describe('RunList Reducer', () => {
     });
   });
 
-  it('should handle FETCH_RUN_FAILED', () => {
+  it('should handle FETCH_RUN_FAILED returning an error message', () => {
     // WHEN
     const state = reducer(undefined, { type: 'FETCH_RUN_FAILED', error: 'Does\'t matter what has here' });
 

@@ -25,7 +25,7 @@ describe('Login Reducer', () => {
     expect(state).toEqual({ date: jasmine.any(Number), token: 'myamazingandsecuretoken', isAuthenticated: true });
   });
 
-  it('should handle LOGIN_FAILED (state plue errorMessage)', () => {
+  it('should handle LOGIN_FAILED returning an error message', () => {
     // WHEN
     const state = reducer(undefined, { type: 'LOGIN_FAILED' });
   
@@ -33,7 +33,7 @@ describe('Login Reducer', () => {
     expect(state).toEqual({ errorMessage: 'An error occurred' });
   });
 
-  it('should handle LOGIN_FAILED (state plue errorMessage)', () => {
+  it('should handle LOGIN_FAILED returning an error message', () => {
     // WHEN
     const state = reducer(undefined, { type: 'LOGOUT_USER' });
   
