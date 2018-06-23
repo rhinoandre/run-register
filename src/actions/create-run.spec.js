@@ -94,8 +94,7 @@ describe('Create Run Actions', () => {
     await store.dispatch(createRunAction({
       friendly_name: 'Weekend Run',
       duration: 370,
-      distance: 110,
-      created: '2018-03-08 15:00:03'
+      distance: 110
     }));
 
     // THEN
